@@ -1,0 +1,48 @@
+Problem 23 — Mini Enterprise Data Processing Platform
+
+Problem statement: "Build a mini enterprise data-processing platform that receives data from multiple sources such as CSV files, log files, API responses, and web pages. The platform should validate, normalize, process, analyze, and report the data using Python."
+
+Simple Solution
+import pandas as pd
+import numpy as np
+import re
+from concurrent.futures import ThreadPoolExecutor
+
+
+def read_csv():
+    return pd.read_csv("data.csv")
+
+
+def read_log():
+    with open("server.log", "r") as file:
+        text = file.read()
+
+    return re.findall(r'\d+\.\d+\.\d+\.\d+', text)
+
+
+def process(data):
+    data = data.dropna()
+    data.columns = data.columns.str.lower()
+
+    print("Records:", len(data))
+    print("Average:", np.mean(data["salary"]))
+
+
+def main():
+
+    # Collect data concurrently
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        csv = executor.submit(read_csv)
+        logs = executor.submit(read_log)
+
+        data = csv.result()
+        ips = logs.result()
+
+    # Process data
+    process(data)
+
+    print("IP Addresses:", ips)
+    print("Processing completed")
+
+
+main()
