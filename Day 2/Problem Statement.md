@@ -107,3 +107,7 @@ Speed Improvement : XX.XX%
 ## Conclusion
 
 The concurrent implementation can process independent data sources simultaneously. This can reduce overall processing time compared with sequential execution, especially when the workload contains multiple independent files or I/O operations.
+
+
+📄 **Python Implementation:**  
+[View Problem_23.py](Solution.py)
