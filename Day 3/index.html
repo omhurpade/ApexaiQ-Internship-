@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .student {
+            background: #eef4ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        #output {
+            background: #111;
+            color: #00ff88;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 id="title">JavaScript Student Management Dashboard</h1>
+
+    <!-- ========================================= -->
+    <!-- DOM INPUT SECTION -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <h2>Add Student</h2>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name"
+        >
+
+        <input
+            type="number"
+            id="studentAge"
+            placeholder="Enter age"
+        >
+
+        <input
+            type="number"
+            id="studentMarks"
+            placeholder="Enter marks"
+        >
+
+        <button id="addStudentBtn">
+            Add Student
+        </button>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- STUDENT LIST -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <h2>Student List</h2>
+
+        <div id="studentList"></div>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- OPERATIONS -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <h2>Operations</h2>
+
+        <button id="showTotalBtn">
+            Show Total Students
+        </button>
+
+        <button id="showAverageBtn">
+            Show Average Marks
+        </button>
+
+        <button id="showTopperBtn">
+            Find Topper
+        </button>
+
+        <button id="showPassedBtn">
+            Show Passed Students
+        </button>
+
+        <button id="changeTitleBtn">
+            Change Title
+        </button>
+
+    </div>
+
+
+    <!-- ========================================= -->
+    <!-- OUTPUT -->
+    <!-- ========================================= -->
+
+    <div class="card">
+
+        <h2>Output</h2>
+
+        <div id="output">
+            Output will appear here...
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // ============================================================
+    // 1. VARIABLES
+    // ============================================================
+
+    /*
+        Demonstrating:
+
+        var
+        let
+        const
+    */
+
+    var oldVariable = "Old JavaScript Variable";
+
+    let totalStudents = 0;
+
+    const collegeName = "SSGMCE";
+
+
+    // ============================================================
+    // 2. DATA TYPES
+    // ============================================================
+
+    let studentName = "Aarav";       // String
+
+    let studentAge = 20;             // Number
+
+    let isStudent = true;            // Boolean
+
+    let studentAddress = null;       // Null
+
+    let studentCourse;               // Undefined
+
+    let studentSkills = [             // Array
+        "HTML",
+        "CSS",
+        "JavaScript"
+    ];
+
+    let studentObject = {             // Object
+        name: "Aarav",
+        age: 20
+    };
+
+
+    // ============================================================
+    // 3. OPERATORS
+    // ============================================================
+
+    let marks1 = 80;
+    let marks2 = 70;
+
+    // Arithmetic operators
+
+    let addition = marks1 + marks2;
+    let subtraction = marks1 - marks2;
+    let multiplication = marks1 * marks2;
+    let division = marks1 / marks2;
+    let remainder = marks1 % marks2;
+
+
+    // Comparison operators
+
+    let isGreater = marks1 > marks2;
+
+    let isEqual = marks1 === marks2;
+
+    let isNotEqual = marks1 !== marks2;
+
+
+    // Logical operators
+
+    let hasPassed = marks1 >= 40 && marks2 >= 40;
+
+    let hasGoodMarks = marks1 >= 90 || marks2 >= 90;
+
+    let notPassed = !hasPassed;
+
+
+    // Assignment operators
+
+    let counter = 10;
+
+    counter += 5;
+    counter -= 2;
+    counter *= 2;
+    counter /= 2;
+
+
+    // ============================================================
+    // 4. ARRAY
+    // ============================================================
+
+    /*
+        Array containing objects.
+    */
+
+    const students = [
+
+        {
+            name: "Aarav",
+            age: 20,
+            marks: 85,
+            skills: ["HTML", "CSS", "JavaScript"]
+        },
+
+        {
+            name: "Priya",
+            age: 21,
+            marks: 92,
+            skills: ["JavaScript", "React"]
+        },
+
+        {
+            name: "Rahul",
+            age: 20,
+            marks: 65,
+            skills: ["HTML", "CSS"]
+        }
+
+    ];
+
+
+    // ============================================================
+    // 5. ARRAY METHODS
+    // ============================================================
+
+    // length
+
+    console.log("Total students:", students.length);
+
+
+    // push()
+
+    students.push({
+        name: "Neha",
+        age: 21,
+        marks: 78,
+        skills: ["JavaScript", "Node.js"]
+    });
+
+
+    // pop()
+
+    // Example:
+    // students.pop();
+
+
+    // unshift()
+
+    students.unshift({
+        name: "Rohan",
+        age: 20,
+        marks: 88,
+        skills: ["JavaScript"]
+    });
+
+
+    // shift()
+
+    // Example:
+    // students.shift();
+
+
+    // map()
+
+    const studentNames = students.map(function(student) {
+
+        return student.name;
+
+    });
+
+
+    // filter()
+
+    const passedStudents = students.filter(function(student) {
+
+        return student.marks >= 40;
+
+    });
+
+
+    // reduce()
+
+    const totalMarks = students.reduce(function(total, student) {
+
+        return total + student.marks;
+
+    }, 0);
+
+
+    // ============================================================
+    // 6. OBJECT
+    // ============================================================
+
+    const college = {
+
+        name: "SSGMCE",
+
+        location: "Shegaon",
+
+        department: "Information Technology",
+
+        students: students,
+
+        showCollege: function() {
+
+            return this.name + " - " + this.location;
+
+        }
+
+    };
+
+
+    // Accessing object properties
+
+    console.log(college.name);
+
+    console.log(college["location"]);
+
+
+    // Adding property
+
+    college.established = 1983;
+
+
+    // Updating property
+
+    college.department = "IT Department";
+
+
+    // Deleting property
+
+    // delete college.established;
+
+
+    // Object method
+
+    console.log(college.showCollege());
+
+
+    // ============================================================
+    // 7. FUNCTION DECLARATION
+    // ============================================================
+
+    function calculateAverage() {
+
+        if (students.length === 0) {
+
+            return 0;
+
+        }
+
+        return totalMarks / students.length;
+
+    }
+
+
+    // ============================================================
+    // 8. FUNCTION WITH PARAMETERS AND RETURN
+    // ============================================================
+
+    function calculateGrade(marks) {
+
+        if (marks >= 90) {
+
+            return "A+";
+
+        } else if (marks >= 80) {
+
+            return "A";
+
+        } else if (marks >= 70) {
+
+            return "B";
+
+        } else if (marks >= 60) {
+
+            return "C";
+
+        } else if (marks >= 40) {
+
+            return "D";
+
+        } else {
+
+            return "F";
+
+        }
+
+    }
+
+
+    // ============================================================
+    // 9. FUNCTION EXPRESSION
+    // ============================================================
+
+    const getStudentCount = function() {
+
+        return students.length;
+
+    };
+
+
+    // ============================================================
+    // 10. ARROW FUNCTION
+    // ============================================================
+
+    const getStudentNames = () => {
+
+        return students.map(student => student.name);
+
+    };
+
+
+    // ============================================================
+    // 11. HIGHER-ORDER FUNCTION
+    // ============================================================
+
+    /*
+        filter() and map() are examples of higher-order
+        functions because they accept another function.
+    */
+
+    const highScorers = students.filter(student => {
+
+        return student.marks >= 80;
+
+    });
+
+
+    // ============================================================
+    // 12. RECURSIVE FUNCTION
+    // ============================================================
+
+    function printCountdown(number) {
+
+        if (number <= 0) {
+
+            return;
+
+        }
+
+        console.log(number);
+
+        printCountdown(number - 1);
+
+    }
+
+
+    // Example:
+    printCountdown(3);
+
+
+    // ============================================================
+    // 13. IIFE
+    // ============================================================
+
+    (function() {
+
+        console.log("IIFE executed automatically.");
+
+    })();
+
+
+    // ============================================================
+    // 14. CONDITIONAL STATEMENTS
+    // ============================================================
+
+    function checkStudentResult(student) {
+
+        if (student.marks >= 90) {
+
+            return "Excellent";
+
+        } else if (student.marks >= 60) {
+
+            return "Good";
+
+        } else if (student.marks >= 40) {
+
+            return "Passed";
+
+        } else {
+
+            return "Failed";
+
+        }
+
+    }
+
+
+    // ============================================================
+    // 15. SWITCH STATEMENT
+    // ============================================================
+
+    function getDepartmentCode(department) {
+
+        switch (department) {
+
+            case "IT":
+                return "IT-101";
+
+            case "CSE":
+                return "CS-101";
+
+            case "ECE":
+                return "EC-101";
+
+            default:
+                return "UNKNOWN";
+
+        }
+
+    }
+
+
+    // ============================================================
+    // 16. FOR LOOP
+    // ============================================================
+
+    function displayStudentsUsingForLoop() {
+
+        let result = "";
+
+        for (let i = 0; i < students.length; i++) {
+
+            result +=
+                (i + 1) +
+                ". " +
+                students[i].name +
+                " - " +
+                students[i].marks +
+                "\n";
+
+        }
+
+        return result;
+
+    }
+
+
+    // ============================================================
+    // 17. FOR...OF LOOP
+    // ============================================================
+
+    function displayUsingForOf() {
+
+        let result = "";
+
+        for (const student of students) {
+
+            result +=
+                student.name +
+                " scored " +
+                student.marks +
+                "\n";
+
+        }
+
+        return result;
+
+    }
+
+
+    // ============================================================
+    // 18. FOR...IN LOOP
+    // ============================================================
+
+    function displayObjectUsingForIn() {
+
+        let result = "";
+
+        const firstStudent = students[0];
+
+        for (const property in firstStudent) {
+
+            result +=
+                property +
+                " : " +
+                firstStudent[property] +
+                "\n";
+
+        }
+
+        return result;
+
+    }
+
+
+    // ============================================================
+    // 19. WHILE LOOP
+    // ============================================================
+
+    function whileLoopExample() {
+
+        let i = 0;
+
+        let result = "";
+
+        while (i < students.length) {
+
+            result += students[i].name + "\n";
+
+            i++;
+
+        }
+
+        return result;
+
+    }
+
+
+    // ============================================================
+    // 20. DO...WHILE LOOP
+    // ============================================================
+
+    function doWhileExample() {
+
+        let i = 0;
+
+        let result = "";
+
+        do {
+
+            if (students[i]) {
+
+                result += students[i].name + "\n";
+
+            }
+
+            i++;
+
+        } while (i < students.length);
+
+        return result;
+
+    }
+
+
+    // ============================================================
+    // 21. DOM — SELECTING ELEMENTS
+    // ============================================================
+
+    const titleElement =
+        document.getElementById("title");
+
+    const studentListElement =
+        document.getElementById("studentList");
+
+    const outputElement =
+        document.getElementById("output");
+
+    const addStudentButton =
+        document.getElementById("addStudentBtn");
+
+
+    // querySelector()
+
+    const firstCard =
+        document.querySelector(".card");
+
+
+    // querySelectorAll()
+
+    const allCards =
+        document.querySelectorAll(".card");
+
+
+    // ============================================================
+    // 22. DOM — DISPLAY STUDENTS
+    // ============================================================
+
+    function displayStudents() {
+
+        studentListElement.innerHTML = "";
+
+        students.forEach(function(student) {
+
+            const studentDiv =
+                document.createElement("div");
+
+            studentDiv.className = "student";
+
+            const nameHeading =
+                document.createElement("h3");
+
+            nameHeading.textContent =
+                student.name;
+
+            const details =
+                document.createElement("p");
+
+            details.textContent =
+                "Age: " +
+                student.age +
+                " | Marks: " +
+                student.marks +
+                " | Grade: " +
+                calculateGrade(student.marks);
+
+            const result =
+                document.createElement("p");
+
+            result.textContent =
+                checkStudentResult(student);
+
+            if (student.marks >= 40) {
+
+                result.className = "success";
+
+            } else {
+
+                result.className = "fail";
+
+            }
+
+            studentDiv.appendChild(nameHeading);
+
+            studentDiv.appendChild(details);
+
+            studentDiv.appendChild(result);
+
+            studentListElement.appendChild(studentDiv);
+
+        });
+
+    }
+
+
+    // ============================================================
+    // 23. DOM — ADD NEW STUDENT
+    // ============================================================
+
+    addStudentButton.addEventListener("click", function() {
+
+        const name =
+            document.getElementById("studentName").value;
+
+        const age =
+            Number(
+                document.getElementById("studentAge").value
+            );
+
+        const marks =
+            Number(
+                document.getElementById("studentMarks").value
+            );
+
+
+        // Validation using conditional statement
+
+        if (name === "" || age <= 0 || marks < 0 || marks > 100) {
+
+            outputElement.textContent =
+                "Please enter valid student details.";
+
+            return;
+
+        }
+
+
+        // Creating new object
+
+        const newStudent = {
+
+            name: name,
+
+            age: age,
+
+            marks: marks,
+
+            skills: []
+
+        };
+
+
+        // Adding object to array
+
+        students.push(newStudent);
+
+
+        // Update DOM
+
+        displayStudents();
+
+
+        // Change output content
+
+        outputElement.textContent =
+            "Student added successfully!";
+
+
+        // Clear inputs
+
+        document.getElementById("studentName").value = "";
+
+        document.getElementById("studentAge").value = "";
+
+        document.getElementById("studentMarks").value = "";
+
+    });
+
+
+    // ============================================================
+    // 24. DOM — SHOW TOTAL STUDENTS
+    // ============================================================
+
+    document
+        .getElementById("showTotalBtn")
+        .addEventListener("click", function() {
+
+            outputElement.textContent =
+                "Total Students: " +
+                students.length;
+
+        });
+
+
+    // ============================================================
+    // 25. DOM — SHOW AVERAGE
+    // ============================================================
+
+    document
+        .getElementById("showAverageBtn")
+        .addEventListener("click", function() {
+
+            const average =
+                students.reduce(
+                    (sum, student) =>
+                        sum + student.marks,
+                    0
+                ) / students.length;
+
+
+            outputElement.textContent =
+                "Average Marks: " +
+                average.toFixed(2);
+
+        });
+
+
+    // ============================================================
+    // 26. DOM — FIND TOPPER
+    // ============================================================
+
+    document
+        .getElementById("showTopperBtn")
+        .addEventListener("click", function() {
+
+            const topper =
+                students.reduce(function(top, student) {
+
+                    if (student.marks > top.marks) {
+
+                        return student;
+
+                    }
+
+                    return top;
+
+                });
+
+
+            outputElement.textContent =
+                "Topper: " +
+                topper.name +
+                "\nMarks: " +
+                topper.marks +
+                "\nGrade: " +
+                calculateGrade(topper.marks);
+
+        });
+
+
+    // ============================================================
+    // 27. DOM — SHOW PASSED STUDENTS
+    // ============================================================
+
+    document
+        .getElementById("showPassedBtn")
+        .addEventListener("click", function() {
+
+            const passed =
+                students.filter(function(student) {
+
+                    return student.marks >= 40;
+
+                });
+
+
+            outputElement.textContent =
+                "Passed Students:\n\n" +
+                passed
+                    .map(student => student.name)
+                    .join("\n");
+
+        });
+
+
+    // ============================================================
+    // 28. DOM — CHANGE CONTENT
+    // ============================================================
+
+    document
+        .getElementById("changeTitleBtn")
+        .addEventListener("click", function() {
+
+            titleElement.textContent =
+                "JavaScript DOM Dashboard";
+
+        });
+
+
+    // ============================================================
+    // 29. DOM — CHANGE STYLE
+    // ============================================================
+
+    titleElement.style.fontSize = "32px";
+
+    titleElement.style.marginBottom = "20px";
+
+
+    // ============================================================
+    // 30. INITIAL DISPLAY
+    // ============================================================
+
+    displayStudents();
+
+
+    // ============================================================
+    // 31. CONSOLE DEMONSTRATIONS
+    // ============================================================
+
+    console.log("College:", collegeName);
+
+    console.log("Student Names:", getStudentNames());
+
+    console.log("Student Count:", getStudentCount());
+
+    console.log("Average Marks:", calculateAverage());
+
+    console.log("High Scorers:", highScorers);
+
+    console.log(
+        "Department Code:",
+        getDepartmentCode("IT")
+    );
+
+    console.log(
+        "FOR LOOP:\n" +
+        displayStudentsUsingForLoop()
+    );
+
+    console.log(
+        "FOR OF LOOP:\n" +
+        displayUsingForOf()
+    );
+
+    console.log(
+        "FOR IN LOOP:\n" +
+        displayObjectUsingForIn()
+    );
+
+    console.log(
+        "WHILE LOOP:\n" +
+        whileLoopExample()
+    );
+
+    console.log(
+        "DO WHILE LOOP:\n" +
+        doWhileExample()
+    );
+
+
+</script>
+
+</body>
+</html>
