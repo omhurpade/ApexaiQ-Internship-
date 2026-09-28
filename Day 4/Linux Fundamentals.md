@@ -1,6 +1,4 @@
-# Linux Fundamentals — Day 1
-
-> A simple, beginner-friendly guide to understanding Linux and using the terminal.
+# Linux Fundamentals 
 
 ---
 
